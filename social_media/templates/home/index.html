@@ -26,6 +26,7 @@
             </li>
           </ul>
           <form class="d-flex" role="search">
+            <div>Welcome, {{request.user.username }}<div>
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">Search</button>
           </form>
@@ -43,7 +44,15 @@
       <div class="row">
           <div class="col-sm-8 col-sm-offset-2">
               <div class="panel panel-white profile-widget">
-                  <div class="row">
+                <form>
+                    <input name="user_id" id="user_id" type="hidden" value="{{request.user.id}}" />
+                    <div class="row">
+                        <textarea class="form-control" rows = "5" cols = "60" name = "description">What's in your mind?</textarea>
+                        <button type="submit" class="btn btn-primary btn-lg"
+                        style="padding-left: 2.5rem; padding-right: 2.5rem;">Post</button>
+                    </div>
+                </form>
+                  
                      
               </div>
               

@@ -1,16 +1,28 @@
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import Profile,Post,Comment
 
 
+
 # Form for registering new user
-class UserForm(forms.ModelForm):
+class UserForm(forms.Form):
 	password = forms.CharField(widget=forms.PasswordInput)
 	email = forms.EmailField(max_length=254, help_text='Required field')
 	class Meta:
 		model = User
-		fields = ['username','email','password']
+		fields = ['email','password']
 
+
+    
+# Create your forms here.
+class RegisterForm(UserCreationForm):
+	password1 = forms.CharField(max_length=28)
+	password2 = forms.CharField(max_length=28)
+	email = forms.EmailField(max_length=254, help_text='Required field')
+	class Meta:
+		model = User
+		fields = ['email','password1', 'password2']
 
 # Form for updating user email
 class UpdateUserForm(forms.ModelForm):
