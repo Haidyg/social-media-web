@@ -13,7 +13,6 @@ class UserForm(forms.Form):
 		model = User
 		fields = ['email','password']
 
-
     
 # Create your forms here.
 class RegisterForm(UserCreationForm):
@@ -22,7 +21,8 @@ class RegisterForm(UserCreationForm):
 	email = forms.EmailField(max_length=254, help_text='Required field')
 	class Meta:
 		model = User
-		fields = ['email','password1', 'password2']
+		fields = ['username','email','password1', 'password2']
+
 
 # Form for updating user email
 class UpdateUserForm(forms.ModelForm):

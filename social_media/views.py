@@ -17,17 +17,14 @@ import itertools
 from .forms import RegisterForm
 
 
-
-
 def home(request):
     print(f" Request {request}")
-    # user = request.user
+    user = request.user
     if request.user.is_authenticated:
-         return render(request, 'home/index.html')
+        return render(request, 'home/index.html')
     else:
         return redirect('login')
 
-   
 
 def profile(request):
     return render(request, 'profile/index.html')
@@ -68,9 +65,9 @@ def register(request):
             print(f'form isValid {form}')
             form.save()
             print("form after save")
-            email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password')
-            #account = authenticate(email=email, password=raw_password)
+            account = authenticate(username=username, password=raw_password)
             login(request)
 
             return redirect('home')

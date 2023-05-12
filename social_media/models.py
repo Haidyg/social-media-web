@@ -15,6 +15,7 @@ class Profile(models.Model):
 
 	def __str__(self):
 		return f'{self.user.username} Profile'
+	
 
 # Model for storing post
 class Post(models.Model):
@@ -25,7 +26,7 @@ class Post(models.Model):
 	post_picture = models.FileField(default="default.jpg",upload_to='post_picture')
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
-
+	
 
 	def __str__(self):
 		return self.user.username
@@ -38,7 +39,7 @@ class Following(models.Model):
 	following_user = models.IntegerField(null=False, blank=False, unique=True)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
-	
+
 
 	def __str__(self):
 		return self.following_user.username
