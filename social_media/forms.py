@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import Profile,Post,Comment
+from .models import Following, Profile,Post,Comment
 
 
 
@@ -19,6 +19,7 @@ class RegisterForm(UserCreationForm):
 	password1 = forms.CharField(max_length=28)
 	password2 = forms.CharField(max_length=28)
 	email = forms.EmailField(max_length=254, help_text='Required field')
+	username = forms.CharField(max_length=255)
 	class Meta:
 		model = User
 		fields = ['username','email','password1', 'password2']
@@ -33,6 +34,13 @@ class UpdateUserForm(forms.ModelForm):
 		fields = ['email']
 
 
+class AddFollower(forms.ModelForm):
+	following_user = forms.IntegerField()
+    
+
+	class Meta:
+		model = Following
+		fields = ['following_user']
 # Form for updating profile
 class UpdateProfileForm(forms.ModelForm):
 

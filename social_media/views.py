@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from django.views.generic import View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import UserForm, UpdateUserForm, UpdateProfileForm
+from .forms import AddFollower, UserForm, UpdateUserForm, UpdateProfileForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -15,8 +15,10 @@ from django.contrib import auth
 from django.contrib.auth.hashers import make_password
 import itertools
 from .forms import RegisterForm
+from django.contrib import messages
 
 
+@login_required
 def home(request):
     print(f" Request {request}")
     user = request.user
@@ -25,9 +27,16 @@ def home(request):
     else:
         return redirect('login')
 
-
+@login_required
 def profile(request):
-    return render(request, 'profile/index.html')
+    print("Inside Profile")
+    if request.method == 'POST' and request.POST.get('following_user') :
+        following= Following()
+        following.user = request.user
+        following.following_user = request.POST.get('following_user') 
+        following.save()
+    db_friends = User.objects.all().exclude(username=request.user.username)
+    return render(request, 'profile/index.html' ,  {"db_friends": db_friends})
 
 def login_request(request):
     context ={}
@@ -59,8 +68,7 @@ def register(request):
     if request.POST:
         form = RegisterForm(request.POST)
         valid = form.is_valid()
-        
-        print(f'inside Login2 {form}')
+        print(f"FORM ==> {form}")
         if form.is_valid():
             print(f'form isValid {form}')
             form.save()
@@ -68,33 +76,31 @@ def register(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password')
             account = authenticate(username=username, password=raw_password)
-            login(request)
+            user = User.objects.get(username=username)
+            login(request,user)
 
             return redirect('home')
         else:
-            form = RegisterForm()
             context['registration_form'] = form
-            return render(request, 'register/index.html', context=context)
+            #messages.error(request, form.errors.as_text)
+            return render(request, 'register/index.html', {'form': form})
+
     form = RegisterForm()
     context['registration_form'] = form
     print('Registration')
     return render(request, 'register/index.html', context=context)
 
-
+@login_required
 def friends(request):
-    return render(request, 'friends/index.html')
-
-
-def VerifyInput(username, password):
-    error = []
-    if len(username) > 4:
-        error.append('Username should be at least 4 characters long')
-    elif len(password) > 8:
-        error.append('Password should be at least 8 characters long')
-    else:
-        print('OK')
-
-    return error
+    print(f"user ==> {request.user.id}")
+    followers = Following.objects.filter(user=request.user)
+    user_followers: list = []
+    print(f"follower ==> {len(followers)}")
+    for user in followers:
+        user_follower = User.objects.filter(id=user.following_user).first()
+        user_followers.append(user_follower)
+    
+    return render(request, 'friends/index.html', {"followers": user_followers})
 
 # from django.views.generic import TemplateView
 

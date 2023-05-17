@@ -41,11 +41,6 @@ class Following(models.Model):
 	updated_at = models.DateTimeField(auto_now=True)
 
 
-	def __str__(self):
-		return self.following_user.username
-
-
-
 # Model for storing comment
 class Comment(models.Model):
 	post = models.ForeignKey(Post,on_delete = models.CASCADE)

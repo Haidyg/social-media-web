@@ -41,66 +41,25 @@
         <div class="row">
             
               <!-- /.col-lg-3 col-md-4 -->
-              
+              {% if followers %}
+                 {% for follower in followers %}
               <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="panel panel-default userlist">
                   <div class="panel-body text-center">
                     <div class="userprofile">
                       <div class="userpic"> <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" class="userpicimg"> </div>
-                      <h3 class="username">Haidy Gamal</h3>
+                      <h3 class="username">{{follower.username}}</h3>
                       <p>Cairo, Egypt</p>
                     </div>
-                    <p><a href="mailto:info@maxartkiller.in">info@maxartkiller.in</a> | +91 000 000 0000</p>
+                    <p><a href="mailto:info@maxartkiller.in">{{follower.email}}</a> | +91 000 000</p>
+                   
                     <div class="socials tex-center"> <a href="" class="btn btn-circle btn-primary "><i class="fa fa-facebook"></i></a> <a href="" class="btn btn-circle btn-danger "><i class="fa fa-google-plus"></i></a> <a href="" class="btn btn-circle btn-info "><i class="fa fa-twitter"></i></a> <a href="" class="btn btn-circle btn-warning "><i class="fa fa-envelope"></i></a> </div>
                   </div>
-                  <div class="panel-footer"> <a href="" class="btn btn-link">Add a friend</a> <a href="" class="btn btn-link pull-right favorite"><i class="fa fa-heart-o"></i></a> </div>
+                    
                 </div>
               </div>
-              <!-- /.col-lg-3 col-md-4 -->
-              <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="panel panel-default userlist">
-                  <div class="panel-body text-center">
-                    <div class="userprofile">
-                      <div class="userpic"> <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" class="userpicimg"> </div>
-                      <h3 class="username">Jimmy</h3>
-                      <p>Toronto, Canada</p>
-                    </div>
-                    <p><a href="mailto:info@maxartkiller.in">info@maxartkiller.in</a> | +91 000 000 0000</p>
-                    <div class="socials tex-center"> <a href="" class="btn btn-circle btn-primary "><i class="fa fa-facebook"></i></a> <a href="" class="btn btn-circle btn-danger "><i class="fa fa-google-plus"></i></a> <a href="" class="btn btn-circle btn-info "><i class="fa fa-twitter"></i></a> <a href="" class="btn btn-circle btn-warning "><i class="fa fa-envelope"></i></a> </div>
-                  </div>
-                  <div class="panel-footer"> <a href="" class="btn btn-link">Add a friend</a> <a href="" class="btn btn-link pull-right favorite"><i class="fa fa-heart-o"></i></a> </div>
-                </div>
-              </div>
-              <!-- /.col-lg-3 col-md-4 -->
-              <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="panel panel-default userlist">
-                  <div class="panel-body text-center">
-                    <div class="userprofile">
-                      <div class="userpic"> <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="userpicimg"> </div>
-                      <h3 class="username">Asya Mohamed</h3>
-                      <p>Toronto, Canada</p>
-                    </div>
-                    <p><a href="mailto:info@maxartkiller.in">info@maxartkiller.in</a> | +91 000 000 0000</p>
-                    <div class="socials tex-center"> <a href="" class="btn btn-circle btn-primary "><i class="fa fa-facebook"></i></a> <a href="" class="btn btn-circle btn-danger "><i class="fa fa-google-plus"></i></a> <a href="" class="btn btn-circle btn-info "><i class="fa fa-twitter"></i></a> <a href="" class="btn btn-circle btn-warning "><i class="fa fa-envelope"></i></a> </div>
-                  </div>
-                  <div class="panel-footer"> <a href="" class="btn btn-link">Add a friend</a> <a href="" class="btn btn-link pull-right favorite"><i class="fa fa-heart-o"></i></a> </div>
-                </div>
-              </div>
-              <!-- /.col-lg-3 col-md-4 -->
-              <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="panel panel-default userlist">
-                  <div class="panel-body text-center">
-                    <div class="userprofile">
-                      <div class="userpic"> <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="userpicimg"> </div>
-                      <h3 class="username">John Doe</h3>
-                      <p>New York, USA</p>
-                    </div>
-                    <p><a href="mailto:info@maxartkiller.in">info@maxartkiller.in</a> | +91 000 000 0000</p>
-                    <div class="socials tex-center"> <a href="" class="btn btn-circle btn-primary "><i class="fa fa-facebook"></i></a> <a href="" class="btn btn-circle btn-danger "><i class="fa fa-google-plus"></i></a> <a href="" class="btn btn-circle btn-info "><i class="fa fa-twitter"></i></a> <a href="" class="btn btn-circle btn-warning "><i class="fa fa-envelope"></i></a> </div>
-                  </div>
-                  <div class="panel-footer"> <a href="" class="btn btn-link">Add a friend</a> <a href="" class="btn btn-link pull-right favorite"><i class="fa fa-heart-o"></i></a> </div>
-                </div>
-              </div>
+                {% endfor %}
+              {% endif %}
 
             </div>
             </div>
