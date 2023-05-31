@@ -1,9 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import Following, Profile,Post,Comment
-
-
+from .models import Following, Profile,Post,Comment, UploadImage  
 
 # Form for registering new user
 class UserForm(forms.Form):
@@ -13,7 +11,6 @@ class UserForm(forms.Form):
 		model = User
 		fields = ['email','password']
 
-    
 # Create your forms here.
 class RegisterForm(UserCreationForm):
 	password1 = forms.CharField(max_length=28)
@@ -49,12 +46,13 @@ class UpdateProfileForm(forms.ModelForm):
 		fields = ['status_info','profile_photo']
 
 
+
 # Form for creating a post
 class CreatePost(forms.ModelForm):
 	
 	class Meta:
 		model = Post
-		fields = ['post_text','post_picture']
+		fields = '__all__'  
 
 
 # Form for creating a comment
@@ -63,3 +61,10 @@ class CreateComment(forms.ModelForm):
 	class Meta:
 		model = Comment
 		fields = ['comment_text']
+
+class UserImage(forms.ModelForm):  
+    class meta:  
+        # To specify the model to be used to create form  
+        models = UploadImage  
+        # It includes all the fields of model  
+        fields = '__all__'  
